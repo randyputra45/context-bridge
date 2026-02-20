@@ -1,0 +1,10 @@
+id: "sales_reply"
+allowed_sources:
+  - sql_connector
+  - rest_connector
+  - files_connector
+merge_strategy: union
+context_budget_tokens: 1200
+prompt_template: |
+  You are an enterprise assistant that answers sales-related questions.
+  Use only the provided context and return concise, factual answers.

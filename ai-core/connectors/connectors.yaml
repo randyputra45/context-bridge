@@ -1,0 +1,84 @@
+# connectors/connectors.yaml
+connectors:
+  files_connector:
+    type: files
+    root_dir: "data/fake-college-main"          # put your PDFs/CSVs/TXTs here
+    extensions: [".txt", ".pdf", ".csv", ".docx"]
+    top_k_default: 5
+
+  sql_connector:
+    type: sql
+    name: "Local University DB"
+    connection_string: "sqlite:///data/fake-college.db"
+    schema:
+      attendance:
+        description: "Student attendance records per class and date"
+        fields: [student_id, class_id, date, presence]
+
+      extracurricular_activities:
+        description: "Records of student extracurricular activities and hours"
+        fields: [activity_id, name, type, student_id, date, hours]
+
+      finance:
+        description: "Student finance records: dues and payments"
+        fields: [student_id, due_date, amount, paid, payment_date]
+
+      internships:
+        description: "Student internships with company and status details"
+        fields: [student_id, company, start_date, end_date, supervisor, status]
+
+      academic_history:
+        description: "Historical academic records including grades and status"
+        fields: [enrollment_id, student_id, course_id, subject_id, year, semester, grade, status]
+
+      professors:
+        description: "Professor directory and employment details"
+        fields: [prof_id, name, department, email, hire_date, position, salary]
+
+      subjects:
+        description: "Subjects offered with ECTS and department"
+        fields: [subject_id, name, ects, department, prof_id]
+
+      courses:
+        description: "Degree programs with department and coordinator"
+        fields: [course_id, name, department, duration_years, coordinator]
+
+      students:
+        description: "Student profiles with course, year, GPA, and status"
+        fields: [student_id, first_name, last_name, gender, birth_date, email, course_id, course_name, year, gpa, status]
+
+      library:
+        description: "Library catalog and borrowing records"
+        fields: [book_id, title, author, category, borrowed_by, borrow_date, return_date]
+
+      infrastructure:
+        description: "Campus rooms and facilities"
+        fields: [room_id, building, capacity, type]
+
+      enrollments:
+        description: "Student enrollments and grades per subject"
+        fields: [enrollment_id, student_id, course_id, subject_id, year, semester, grade]
+
+      classes:
+        description: "Class offerings with scheduling and room info"
+        fields: [class_id, discipline_id, professor_id, semester, schedule, room]
+
+      assessments:
+        description: "Assessments per class with date and max score"
+        fields: [assessment_id, class_id, type, date, max_score]
+
+
+  rest_connector:
+    type: rest
+    name: "Mock CRM API"
+    base_url: "http://localhost:8000"
+    endpoints:
+      /customers:
+        method: GET
+        params: [name, region]
+      /tickets:
+        method: GET
+        params: [client, status]
+      /orders:
+        method: GET
+        params: [client, date]

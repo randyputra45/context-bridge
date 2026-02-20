@@ -1,0 +1,7 @@
+openai:
+  model: "gpt-4o-mini"
+  api_key: "YOUR_API_KEY"
+
+app:
+  debug: true
+  trace_db: "data/traces.db"
